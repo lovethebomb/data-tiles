@@ -1,0 +1,40 @@
+{
+  "name": "data-tiles",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build && tsc --module commonjs",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-typescript": "^0.1.1",
+    "cross-env": "^5.1.4",
+    "css-ease": "0.0.1",
+    "express": "^4.16.3",
+    "fork-ts-checker-webpack-plugin": "^0.4.1",
+    "isomorphic-unfetch": "^2.0.0",
+    "next": "^6.0.0",
+    "nodemon": "^1.17.4",
+    "npm": "^6.0.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-transition-group": "^2.3.1",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.12.0",
+    "tslint-react": "^3.5.1",
+    "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/next": "^2.4.9",
+    "@types/react-transition-group": "^2.0.9",
+    "@types/styled-jsx": "^2.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-unsplash": "^0.2.2"
+  }
+}
