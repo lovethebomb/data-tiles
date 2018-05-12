@@ -79,25 +79,20 @@ export default class TileLastFM extends React.Component<TileLastFMProps, TileLas
         )
 
         return (
-            <FadeIn
-            duration={350}
-            easing={ ease['ease-out-expo'] }
-            visible={false}>
-                <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
-                    <TileHeader className={scoped.className}>
-                        <a className="Tile__Header__Logo" href={headerLink} title={headerTitle} target="_blank" rel="noopener">
-                            <Logo />
-                        </a>
-                    </TileHeader>
-                    <TileContent className={scoped.className}>
-                        <div className="Tile__Image">
-                            <img src={this.state.trackImage} className="value" />
-                        </div>
-                        <TileDetails details={details} isLoaded={this.state.isLoaded} />
-                    </TileContent>
-                    <style jsx>{contentStyle}</style>
-                </Tile>
-            </FadeIn>
+            <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
+                <TileHeader className={scoped.className}>
+                    <a className="Tile__Header__Logo" href={headerLink} title={headerTitle} target="_blank" rel="noopener">
+                        <Logo />
+                    </a>
+                </TileHeader>
+                <TileContent className={scoped.className}>
+                    <div className="Tile__Image">
+                        <img src={this.state.trackImage} className="value" />
+                    </div>
+                    <TileDetails details={details} isLoaded={this.state.isLoaded} />
+                </TileContent>
+                <style jsx>{contentStyle}</style>
+            </Tile>
         )
     }
 }

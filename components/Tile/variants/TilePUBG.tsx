@@ -97,7 +97,7 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
 
 
         return (
-            <Tile containerClass={containerClasses.join(' ')}>
+            <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
                 <TileHeader className={scoped.className}>
                     <a className="Tile__Header__Logo" href={headerLink} title={headerTitle} target="_blank" rel="noopener">
                         {headerTitle}

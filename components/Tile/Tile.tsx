@@ -6,7 +6,7 @@ import css from 'styled-jsx/css'
 import TileContent from './TileContent';
 import TileHeader from './TileHeader';
 
-import FadeIn from '../Transition/FadeIn';
+import FadeInUp from '../Transition/FadeInUp';
 
 export interface TileProps {
     containerClass?: string;
@@ -18,7 +18,7 @@ const Tile: StatelessComponent<TileProps> = ({containerClass = "", children, vis
     const className = `Tile ${containerClass}`;
     if (!children) {
         return (
-            <FadeIn
+            <FadeInUp
             duration={350}
             easing={ease['ease-out-expo']}
             visible={visible}>
@@ -27,21 +27,21 @@ const Tile: StatelessComponent<TileProps> = ({containerClass = "", children, vis
                     <TileContent />
                     <style jsx>{tileStyle}</style>
                 </div>
-            </FadeIn>
+            </FadeInUp>
         )
     }
 
-    console.debug('sta', this.visible)
     return (
-        <FadeIn
-        duration={250}
+        <FadeInUp
+        duration={305}
         easing={ease['ease-out-expo']}
-        visible={visible}>
+        visible={visible}
+        up="40px">
             <div className={className}>
                 {children}
                 <style jsx>{tileStyle}</style>
             </div>
-        </FadeIn>
+        </FadeInUp>
     )
 }
 
