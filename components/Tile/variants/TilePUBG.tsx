@@ -153,5 +153,6 @@ p {
 
 .Tile__Rank .value {
     font-weight: bold;
+    color: lightskyblue;
     font-size: 24px;
 }`
