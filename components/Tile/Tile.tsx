@@ -48,7 +48,8 @@ const Tile: StatelessComponent<TileProps> = ({containerClass = "", children, vis
 export const tileStyle = css`
 .Tile {
     height: 100%;
-    width: 20em;
+    max-width: 20em;
+    margin: 0 1em 1em 0;
     box-sizing: border-box;
     box-shadow: 0px 2px 20px #141414;
 }

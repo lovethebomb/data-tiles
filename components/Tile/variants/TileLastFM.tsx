@@ -84,6 +84,7 @@ export default class TileLastFM extends React.Component<TileLastFMProps, TileLas
                     <a className="Tile__Header__Logo" href={headerLink} title={headerTitle} target="_blank" rel="noopener">
                         <Logo />
                     </a>
+                    <span className="Tile__Header__TimeAgo">Lastest scrobble</span>
                 </TileHeader>
                 <TileContent className={scoped.className}>
                     <div className="Tile__Image">

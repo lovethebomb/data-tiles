@@ -1,9 +1,13 @@
 export default class ServiceLastFM {
-    apiKey: string;
+    private apiKey: string;
 
     private baseURL = 'http://ws.audioscrobbler.com/2.0/';
 
     constructor(apiKey: string) {
+        if (!apiKey) {
+            throw new Error('missing apiKey parameter');
+        }
+        
         this.apiKey = apiKey;
     }
 

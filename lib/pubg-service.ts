@@ -1,15 +1,19 @@
 export default class ServicePUBG {
-    apiKey: string;
-    region: string;
+    private apiKey: string;
+    private region: string;
 
     private baseURL = 'https://api.playbattlegrounds.com/shards/';
 
     constructor(apiKey: string, region: string = "pc-eu") {
+        if (!apiKey) {
+            throw new Error('missing apiKey parameter');
+        }
+        
         this.apiKey = apiKey;
         this.region = region;
     }
 
-    async createRequest(endpoint: string) {
+    public async createRequest(endpoint: string) {
         const headers = {
             'Authorization': `Bearer ${this.apiKey}`,
             'accept': 'application/vnd.api+json'
@@ -22,17 +26,13 @@ export default class ServicePUBG {
         const endpoint = `/players?filter[playerIds]=${playerId}`
         const res = await this.createRequest(endpoint)
         const data = await res.json()
-        console.log('[ServicePubg] player fetched', data)
         return data.data[0];
     }
 
     public async getMatch(matchId: string) {
-    
         const endpoint = `/matches/${matchId}`
         const res = await this.createRequest(endpoint)
         const data = await res.json()
-
-        console.log('[ServicePubg] match fetched', data)
         return data
     }
 

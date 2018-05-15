@@ -102,6 +102,7 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
                     <a className="Tile__Header__Logo" href={headerLink} title={headerTitle} target="_blank" rel="noopener">
                         {headerTitle}
                     </a>
+                    <span className="Tile__Header__TimeAgo">Lastest game</span>
                 </TileHeader>
                 <TileContent className={scoped.className}>
                     { items}

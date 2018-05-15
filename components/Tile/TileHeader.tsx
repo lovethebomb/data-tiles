@@ -8,10 +8,24 @@ const TileHeader: StatelessComponent<Props> = ({ children, className = ""}) => (
         .Tile__Header {
             background: #2f2f2f;
             padding: 20px;
-            min-height: 32px;
+            height: 64px;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
             box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .Tile__Header > :global(.Tile__Header__TimeAgo) {
+            font-size: 10px;
+            font-family: monospace;
+            text-transform: uppercase;
+            vertical-align: middle;
+            display: block;
+            display: inline-block;
+            color: #585858;
+            font-weight: bold;
         }
 
         .Tile__Header > :global(a:hover) {
