@@ -1,14 +1,14 @@
-language: "node_js"
-node_js:
+--- 
+before_install: 
+  - "npm i -g npm@v.6.0.1"
+cache: 
+  - 
+    directories: 
+      - node_modules
+install: 
+  - "npm ci"
+language: node_js
+node_js: 
   - "10"
-cache:
-  - directories:
-    - "node_modules"
-before_install:
-  - npm i -g npm@v.6.0.1
-
-install:
-  - npm ci 
-
-  script:
-  - npm run build
+script: 
+  - "npm run build"
