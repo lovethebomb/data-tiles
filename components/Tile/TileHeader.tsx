@@ -1,5 +1,5 @@
-import css from 'styled-jsx/css'
 import { ReactNode, StatelessComponent } from "react";
+import css from 'styled-jsx/css'
 
 const headerStyle = css`
 .Tile__Header {

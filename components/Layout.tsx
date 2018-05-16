@@ -1,5 +1,5 @@
-import css from 'styled-jsx/css'
 import Head from 'next/head'
+import css from 'styled-jsx/css'
 
 const Layout = (props) => (
   <section>
@@ -10,7 +10,7 @@ const Layout = (props) => (
     </Head>
     <article role="main">
       {props.children}
-      <style jsx global>{layoutStyle}</style>
+      <style jsx={true} global={true}>{layoutStyle}</style>
     </article>
   </section>
 )

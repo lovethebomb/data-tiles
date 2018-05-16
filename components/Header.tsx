@@ -12,7 +12,7 @@ const Header = () => (
         <a>About</a>
       </Link>
     </div>
-    <style jsx>{headerStyle}</style>
+    <style jsx={true}>{headerStyle}</style>
   </div>
 )
 
