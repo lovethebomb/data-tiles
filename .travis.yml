@@ -1,6 +1,6 @@
 --- 
 before_install: 
-  - "npm i -g npm@v.6.0.1"
+  - "npm i -g npm@v6.0.1"
 cache: 
   - 
     directories: 
