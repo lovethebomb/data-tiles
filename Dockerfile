@@ -8,12 +8,12 @@ EXPOSE 3000
 RUN mkdir /app
 WORKDIR /app
 
-RUN npm install -g npm@v6.0.1
+RUN npm install -g npm@v6.0.1 tsc typescript
 
-COPY package.json package-lock.json /app/
+COPY package.json package-lock.json tsconfig.json /app/
 RUN npm ci 
 
-COPY . /app
+COPY . /app/
 RUN npm run build
 
 CMD [ "npm", "start" ]
