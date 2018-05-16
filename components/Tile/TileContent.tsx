@@ -1,10 +1,9 @@
-import { StatelessComponent } from "next";
-import { Props } from "react";
+import { ReactNode, StatelessComponent,  } from "react";
 
-const TileContent: StatelessComponent<Props> = ({ children, className = ""}) => (
+const TileContent: StatelessComponent<{children?: ReactNode, className?: string}> = ({ children, className = ""}) => (
     <div className={`Tile__Content ${className}`}>
         {children}
-        <style jsx>{`
+        <style jsx={true}>{`
         .Tile__Content {
             display: flex;
             background: #2f2f2f;

@@ -47,12 +47,12 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
 
     async componentDidMount() {
         const data = await this.getInitialData();
-        const { damageDealt, kills, longestKill, walkDistance, timeSurvived, winPlace} = data;
-        const duration = ~~(timeSurvived / 60);
+        const stats = data.data;
+        const duration = ~~(stats.timeSurvived / 60);
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
-            ...data,
+            ...stats,
             duration,
             isLoaded
         }));
@@ -76,7 +76,7 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
         const details = [
             { title: "Rank", value: this.state.winPlace, className: 'Tile__Rank' },
             { title: "Kills", value: this.state.kills, className: 'Tile__Kills' },
-            { title: "DMG", value: ~~this.state.damageDealth, className: 'Tile__Damage' },
+            { title: "DMG", value: ~~this.state.damageDealt, className: 'Tile__Damage' },
             { title: "LGT", value: `${~~this.state.longestKill}m`, className: 'Tile__LongestKill' },
             { title: "DST", value: `${~~this.state.walkDistance}m`, className: 'Tile__Distance' },
             { title: "DUR", value: `${~~this.state.duration}mn`, className: 'Tile__Survived' },

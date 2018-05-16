@@ -1,13 +1,10 @@
 import React from 'react';
 import css from 'styled-jsx/css'
-import { TransitionGroup } from 'react-transition-group'
-import ease from 'css-ease';
 
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
 import TileHeader from '../TileHeader';
-import FadeIn from '../../Transition/FadeIn';
 
 export interface TileOverwatchProps {
     username: string;
@@ -16,22 +13,39 @@ export interface TileOverwatchProps {
 export interface TileOverwatchState {
     isLoaded: boolean;
     profile: any;
+    level: number;
+    icon: string;
+    rating: string;
+    cpWon: number;
+cpPlayed: number;
+    damageDoneAvg: number;
+    eliminationsAvg: number;
+    deathAvg: number;
 }
+
 
 export default class TileOverwatch extends React.Component<TileOverwatchProps, TileOverwatchState> {
     public state = {
         isLoaded: false,
         profile: {},
+        level: 0,
+        icon: "",
+        rating: "--",
+        cpWon: 0,
+        cpPlayed: 0,
+        damageDoneAvg: 0,
+        eliminationsAvg: 0,
+        deathAvg: 0
     }
 
-    async getInitialData() {
+    public async getInitialData() {
         const res = await fetch('/api/v1/overwatch');
         return res.json();
     }
 
-    async componentDidMount() {
-        const profile = await this.getInitialData();
-
+    public async componentDidMount() {
+        const data = await this.getInitialData();
+        const profile = data.data;
         const icon = profile.icon
         const level = `${profile.prestige}${profile.level}`
         const rating = `${profile.rating === "" ? "--" : profile.rating}`
@@ -56,7 +70,7 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
         }));
     }
 
-    render() {
+    public render() {
         const headerLink = "https://ow-api.com/docs/";
         const headerTitle = "OW API";
         const scoped = resolveScopedStyles(

@@ -1,7 +1,6 @@
 import ease from 'css-ease';
-import { StatelessComponent } from "next";
+import { StatelessComponent } from "react";
 import React from "react";
-import css from 'styled-jsx/css'
 
 import TileContent from './TileContent';
 import TileHeader from './TileHeader';
@@ -25,7 +24,7 @@ const Tile: StatelessComponent<TileProps> = ({containerClass = "", children, vis
                 <div className={className}>
                     <TileHeader />
                     <TileContent />
-                    <style jsx>{tileStyle}</style>
+                    
                 </div>
             </FadeInUp>
         )
@@ -33,25 +32,23 @@ const Tile: StatelessComponent<TileProps> = ({containerClass = "", children, vis
 
     return (
         <FadeInUp
-        duration={305}
+        duration={350}
         easing={ease['ease-out-expo']}
         visible={visible}
         up="40px">
             <div className={className}>
                 {children}
-                <style jsx>{tileStyle}</style>
+                <style jsx={true}>{`
+                .Tile {
+                    height: 100%;
+                    width: 320px;
+                    margin: 0 1em 1em 0;
+                    box-sizing: border-box;
+                    box-shadow: 0px 2px 20px #141414;
+                }`}</style>
             </div>
         </FadeInUp>
     )
 }
 
-export const tileStyle = css`
-.Tile {
-    height: 100%;
-    width: 20em;
-    margin: 0 1em 1em 0;
-    box-sizing: border-box;
-    box-shadow: 0px 2px 20px #141414;
-}
-`
 export default Tile;

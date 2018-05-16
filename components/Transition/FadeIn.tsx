@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Transition } from 'react-transition-group'
 
 const FadeIn = ({ children, duration = 500, delay = 0, easing = "ease", visible = false }) => {
@@ -19,7 +19,7 @@ const FadeIn = ({ children, duration = 500, delay = 0, easing = "ease", visible 
 
     const renderChildren = (state)  => {
         return React.Children.map(children, child => {
-            return React.cloneElement(child, {
+            return React.cloneElement(child as ReactElement<any>, {
                 style: {
                     transitionDelay: `${delay}ms`,
                     transitionDuration: `${duration}ms`,

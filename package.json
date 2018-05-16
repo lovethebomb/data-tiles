@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "next build && tsc --module commonjs",
+    "clean": "del-cli 'pages/*.jsx*' && del-cli 'components/**.jsx*",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
@@ -22,6 +23,8 @@
     "cross-env": "^5.1.4",
     "css-ease": "0.0.1",
     "date-fns": "^2.0.0-alpha.7",
+    "del": "^3.0.0",
+    "del-cli": "^1.1.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "isomorphic-unfetch": "^2.0.0",

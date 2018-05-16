@@ -11,7 +11,7 @@ const ServiceDiscogs = require('./discogs')
 const ServiceOverwatch = require('./overwatch')
 const ServicePUBG = require('./pubg')
 
-const DEFAULT_CACHE = "3 minutes"
+const DEFAULT_CACHE = "2 minutes"
 const metricsInterval = Prometheus.collectDefaultMetrics()
 const PrometheusMetrics = {
     requestCounter: new Prometheus.Counter({

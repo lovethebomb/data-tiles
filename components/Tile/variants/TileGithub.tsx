@@ -1,15 +1,11 @@
+import formatDistance from 'date-fns/formatDistance'
 import React from 'react';
 import css from 'styled-jsx/css'
-import { TransitionGroup } from 'react-transition-group'
-import ease from 'css-ease';
-import formatDistance from 'date-fns/formatDistance'
 
-import ServiceGithub from '../../../lib/github-service';
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
 import TileHeader from '../TileHeader';
-import FadeIn from '../../Transition/FadeIn';
 
 export interface TileGithubProps {
     username: string;
@@ -31,27 +27,27 @@ export interface TileGithubState {
 
 export default class TileGithub extends React.Component<TileGithubProps, TileGithubState> {
     public state = {
+        description: "",
+        forks: 0,
         isLoaded: false,
-        repository: {},
+        language: "",
         license: "",
         name: "",
         openIssues: 0,
-        forks: 0,
+        pushedAt: "",
+        repository: {},
         stargazers: 0,
-        language: "",
-        url: "",
-        description: "",
-        pushedAt: ""
+        url: ""
     }
 
-    async getInitialData() {
+    public async getInitialData() {
         const res = await fetch('/api/v1/github');
         return res.json();
     }
 
-    async componentDidMount() {
-        // const repository = await this.service.getLatestRepo(this.props.username);
-        const repository = await this.getInitialData();
+    public async componentDidMount() {
+        const data = await this.getInitialData();
+        const repository = data.data;
         const license = repository.license.spdx_id;
         const name = repository.name;
         const openIssues = repository.open_issues;
@@ -65,17 +61,17 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
+            description,
+            forks,
             isLoaded,
-            repository,
+            language,
             license,
             name,
             openIssues,
-            forks,
+            pushedAt,
+            repository,
             stargazers,
-            language,
             url,
-            description,
-            pushedAt
         }));
     }
 

@@ -1,5 +1,5 @@
 import { StatelessComponent } from 'next';
-import React from 'react'
+import React, { ComponentClass } from 'react'
 
 import Header from '../components/Header'
 import Layout from '../components/Layout'
@@ -15,7 +15,7 @@ const Index: StatelessComponent<any> = () => (
     <Layout>
         <Header />
         <div className="Tiles">
-            {TILES.map( (tile, index) => React.createElement(tile, { key: index }))}
+            {TILES.map( (tile, index) => React.createElement(tile as ComponentClass<any>, { key: index }))}
         </div>
         <style jsx>{`
       .Tiles {

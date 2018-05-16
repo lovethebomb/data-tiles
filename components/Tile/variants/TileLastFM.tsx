@@ -1,13 +1,13 @@
-import React from 'react';
-import css from 'styled-jsx/css'
-import { TransitionGroup } from 'react-transition-group'
 import ease from 'css-ease';
+import React from 'react';
+import { TransitionGroup } from 'react-transition-group'
+import css from 'styled-jsx/css'
 
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
+import FadeIn from '../../Transition/FadeIn';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
 import TileHeader from '../TileHeader';
-import FadeIn from '../../Transition/FadeIn';
 
 export interface TileLastFMProps {
     username: string;
@@ -42,7 +42,7 @@ export default class TileLastFM extends React.Component<TileLastFMProps, TileLas
 
     async componentDidMount() {
         const data = await this.getInitialData();
-        const lastTrack = data.recenttracks.track[0];
+        const lastTrack = data.data.recenttracks.track[0];
         const trackName = lastTrack.name;
         const trackAlbum = `in ${lastTrack.album['#text']}`;
         const trackArtist = lastTrack.artist['#text'];
@@ -173,8 +173,8 @@ const TileDetails = ({ details, isLoaded }) => {
 }
 
 const contentStyle = css`
-.Tile {
-    height: 180px !important;
+.Tile__Content {
+    height: 117px;
 }
 
 .Tile__Image {
@@ -183,7 +183,7 @@ const contentStyle = css`
     height: 64px;
     background: grey;
     flex: 0 0 auto;
-    margin: auto;
+    margin: auto 0;
     vertical-align: middle;
 }
 

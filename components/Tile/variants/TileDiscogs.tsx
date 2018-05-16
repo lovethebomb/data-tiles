@@ -1,38 +1,54 @@
-import React from 'react';
-import css from 'styled-jsx/css'
-import { TransitionGroup } from 'react-transition-group'
 import ease from 'css-ease';
+import React from 'react';
+import { TransitionGroup } from 'react-transition-group'
+import css from 'styled-jsx/css'
 
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
+import FadeIn from '../../Transition/FadeIn';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
 import TileHeader from '../TileHeader';
-import FadeIn from '../../Transition/FadeIn';
 
 export interface TileDiscogsProps {
     username: string;
     apiKey: string;
 }
 
+interface ICollection {
+    album: string;
+    artists: object[];
+    artistsString: string;
+    format: object;
+    formatsString: string;
+    image: string;
+}
+
 export interface TileDiscogsState {
     isLoaded: boolean;
-    collection: any;
+    collection: ICollection;
 }
 
 export default class TileDiscogs extends React.Component<TileDiscogsProps, TileDiscogsState> {
     public state = {
-        collection: {},
+        collection: {
+            album: "",
+            artists: [],
+            artistsString: "",
+            format: {},
+            formatsString: "",
+            image: ""
+        },
         isLoaded: false
     }
 
-    async getInitialData() {
+    public async getInitialData() {
         const res = await fetch('/api/v1/discogs/collection');
         return res.json()
     }
 
-    async componentDidMount() {
+    public async componentDidMount() {
         const data = await this.getInitialData();
-        const lastCollectionItem = data.releases[0]
+        const lastCollectionItem = data.data.releases[0]
 
         const artistsString = lastCollectionItem.basic_information.artists.map( artist => artist.name).join(', ');
         const descriptions = lastCollectionItem.basic_information.formats[0].descriptions.join(' ');
@@ -40,7 +56,7 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
 
         const formatsString = `${lastCollectionItem.basic_information.formats[0].name} - ${quantity > 1 ? `${quantity}x` : ''}${descriptions}`
 
-        const collection = {
+        const collection: ICollection = {
             album: lastCollectionItem.basic_information.title,
             artists: lastCollectionItem.basic_information.artists,
             artistsString,
@@ -52,12 +68,12 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
-            isLoaded,
-            collection
+            collection,
+            isLoaded
         }));
     }
 
-    render() {
+    public render() {
         const headerLink = "https://www.discogs.com/developers";
         const headerTitle = "Discogs API";
         const containerClasses = [
@@ -73,7 +89,7 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
 
         const scoped = resolveScopedStyles(
             <scope>
-                <style jsx>{contentStyle}</style>
+                <style jsx={true}>{contentStyle}</style>
             </scope>
         )
 
@@ -88,7 +104,7 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
                 <TileContent className={scoped.className}>
                     <Collection image={this.state.collection.image} details={detailsCollection} isLoaded={this.state.isLoaded}/>
                 </TileContent>
-                <style jsx>{contentStyle}</style>
+                <style jsx={true}>{contentStyle}</style>
             </Tile>
         )
     }
@@ -113,14 +129,14 @@ const Collection = ({image, details, isLoaded}) => (
                 ))}
             </TransitionGroup>
         </div>
-        <style jsx>{collectionStyle}</style>
+        <style jsx={true}>{collectionStyle}</style>
     </div>
 )
 
 const Logo = () => (
     <div className="icon">
         <img src="/static/img/discogs/discogs-white.png" />
-        <style jsx>{`
+        <style jsx={true}>{`
                 div {
                     display: inline-block;
                     width: 62px;
@@ -154,7 +170,8 @@ const collectionStyle = css`
 
 .Tile__Image {
     display: block;
-    width: 280px;
+    width: 100%;
+    max-width: 280px;
     margin: auto;
     vertical-align: middle;
 }

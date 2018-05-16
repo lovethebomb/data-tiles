@@ -1,8 +1,6 @@
 import css from 'styled-jsx/css'
 import Head from 'next/head'
 
-import Header from './Header'
-
 const Layout = (props) => (
   <section>
     <Head>
@@ -85,6 +83,16 @@ a {
 
 a:hover {
   color: #b5b5b5;
+}
+
+@media screen and (max-width: 320px) {
+  section {
+    padding: 10px;
+  }
+
+  .Tiles .Tile {
+    margin: 0.5em 0;
+  } 
 }
 `;
 
