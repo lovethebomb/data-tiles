@@ -3,7 +3,6 @@ import css from 'styled-jsx/css'
 import { TransitionGroup } from 'react-transition-group'
 import ease from 'css-ease';
 
-import ServiceDiscogs from '../../../lib/discogs-service';
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
@@ -18,31 +17,22 @@ export interface TileDiscogsProps {
 export interface TileDiscogsState {
     isLoaded: boolean;
     collection: any;
-    wantlist: any;
 }
 
 export default class TileDiscogs extends React.Component<TileDiscogsProps, TileDiscogsState> {
     public state = {
         collection: {},
-        isLoaded: false,
-        wantlist: {}
+        isLoaded: false
     }
 
-    private service = new ServiceDiscogs(this.props.apiKey);
-
-    async getLatestCollectionItem() {
-        const res = await this.service.getLastestCollectionItem('ltb_lucas');
-        return res.releases[0];
-    }
-
-    async getLatestWantlistItem() {
-        const res = await this.service.getLatestWanted('ltb_lucas');
-        return res.wants[0];
+    async getInitialData() {
+        const res = await fetch('/api/v1/discogs/collection');
+        return res.json()
     }
 
     async componentDidMount() {
-        const lastCollectionItem = await this.getLatestCollectionItem();
-        const lastWantlistItem = await this.getLatestWantlistItem();
+        const data = await this.getInitialData();
+        const lastCollectionItem = data.releases[0]
 
         const artistsString = lastCollectionItem.basic_information.artists.map( artist => artist.name).join(', ');
         const descriptions = lastCollectionItem.basic_information.formats[0].descriptions.join(' ');
@@ -59,18 +49,11 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
             image: lastCollectionItem.basic_information.cover_image,
         }
 
-        const wantlist = {
-            album: lastWantlistItem.basic_information.title,
-            artists: lastWantlistItem.basic_information.artists,
-            formats: lastWantlistItem.basic_information.formats,
-            image: lastWantlistItem.basic_information.cover_image,
-        }
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
             isLoaded,
-            collection,
-            wantlist
+            collection
         }));
     }
 
@@ -104,14 +87,6 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
                 </TileHeader>
                 <TileContent className={scoped.className}>
                     <Collection image={this.state.collection.image} details={detailsCollection} isLoaded={this.state.isLoaded}/>
-                    {/* <div className="Tile__Image">
-                        <img src={this.state.collection.image} className="value" />
-                    </div>
-                    <TileDetails details={detailsCollection} isLoaded={this.state.isLoaded} /> */}
-                    {/* <div className="Tile__Image">
-                        <img src={this.state.wantlist.image} className="value" />
-                    </div>
-                    <TileDetails details={detailsWantlist} isLoaded={this.state.isLoaded} /> */}
                 </TileContent>
                 <style jsx>{contentStyle}</style>
             </Tile>

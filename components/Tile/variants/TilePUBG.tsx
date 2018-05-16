@@ -1,7 +1,6 @@
 import React from 'react';
 import css from 'styled-jsx/css'
 
-import ServicePUBG from '../../../lib/pubg-service';
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
@@ -41,30 +40,21 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
         winPlace: 0
     }
 
-    private service = new ServicePUBG(this.props.apiKey);
+    async getInitialData() {
+        const res = await fetch('/api/v1/pubg');
+        return res.json();
+    }
 
     async componentDidMount() {
-        const player = await this.service.getPlayer(this.props.playerId);
-        const lastMatchId = this.service.getPlayerLastMatch(player).id;
-        const lastMatch = await this.service.getMatch(lastMatchId);
-        const participants = this.service.getParticipants(lastMatch);
-        const playerParticipant = this.service.getParticipant(participants, this.props.playerId)
-        const { damageDealt, kills, longestKill, walkDistance, timeSurvived, winPlace} = playerParticipant.attributes.stats;
+        const data = await this.getInitialData();
+        const { damageDealt, kills, longestKill, walkDistance, timeSurvived, winPlace} = data;
         const duration = ~~(timeSurvived / 60);
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
-            damageDealt,
+            ...data,
             duration,
-            isLoaded,
-            kills,
-            lastMatch,
-            longestKill,
-            name: player.attributes.name,
-            player,
-            timeSurvived,
-            walkDistance,
-            winPlace
+            isLoaded
         }));
     }
 

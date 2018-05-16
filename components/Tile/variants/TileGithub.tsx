@@ -44,10 +44,14 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
         pushedAt: ""
     }
 
-    private service = new ServiceGithub();
+    async getInitialData() {
+        const res = await fetch('/api/v1/github');
+        return res.json();
+    }
 
     async componentDidMount() {
-        const repository = await this.service.getLatestRepo(this.props.username);
+        // const repository = await this.service.getLatestRepo(this.props.username);
+        const repository = await this.getInitialData();
         const license = repository.license.spdx_id;
         const name = repository.name;
         const openIssues = repository.open_issues;

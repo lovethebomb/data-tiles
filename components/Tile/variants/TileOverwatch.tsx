@@ -3,7 +3,6 @@ import css from 'styled-jsx/css'
 import { TransitionGroup } from 'react-transition-group'
 import ease from 'css-ease';
 
-import ServiceOverwatch from '../../../lib/overwatch-service';
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
@@ -25,15 +24,13 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
         profile: {},
     }
 
-    private service = new ServiceOverwatch();
-
-    async getProfile() {
-        const res = await this.service.getProfile('lovethebomb-2887');
-        return res;
+    async getInitialData() {
+        const res = await fetch('/api/v1/overwatch');
+        return res.json();
     }
 
     async componentDidMount() {
-        const profile = await this.getProfile();
+        const profile = await this.getInitialData();
 
         const icon = profile.icon
         const level = `${profile.prestige}${profile.level}`
@@ -73,9 +70,6 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
             scoped.className,
             this.state.isLoaded ? 'is-loaded' : ''
         ]
-
-      
-        
 
         return (
             <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
@@ -219,7 +213,7 @@ const detailStyle = css`
 
 const contentStyle = css`
 .Tile { 
-    max-width: 19em;
+    height: 180px;
 }
 
 .Tile__Content {

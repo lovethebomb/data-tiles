@@ -3,7 +3,6 @@ import css from 'styled-jsx/css'
 import { TransitionGroup } from 'react-transition-group'
 import ease from 'css-ease';
 
-import ServiceLastFM from '../../../lib/lastfm-service';
 import { resolveScopedStyles }  from '../../../lib/styled-jsx';
 import Tile from '../Tile';
 import TileContent from '../TileContent';
@@ -17,52 +16,63 @@ export interface TileLastFMProps {
 
 export interface TileLastFMState {
     isLoaded: boolean;
-    lastTrack: any;
-    recentTracks: any;
+    lastTrack: object;
     trackAlbum: string;
     trackArtist: string;
     trackImage: string;
     trackName: string; 
+    trackURL: string; 
 }
 
 export default class TileLastFM extends React.Component<TileLastFMProps, TileLastFMState> {
     public state = {
         isLoaded: false,
         lastTrack: {},
-        recentTracks: {},
         trackAlbum: "",
         trackArtist: "",
         trackImage: "",
         trackName: "", 
+        trackURL: ""
     }
 
-    private service = new ServiceLastFM(this.props.apiKey);
+    async getInitialData() {
+        const res = await fetch('/api/v1/lastfm');
+        return res.json()
+    }
 
     async componentDidMount() {
-        const recentTracks = await this.service.getRecentTracks(this.props.username);
-        const lastTrack = recentTracks.track[0];
+        const data = await this.getInitialData();
+        const lastTrack = data.recenttracks.track[0];
         const trackName = lastTrack.name;
         const trackAlbum = `in ${lastTrack.album['#text']}`;
         const trackArtist = lastTrack.artist['#text'];
         const trackImage = lastTrack.image.filter( image => image.size === 'medium')[0]['#text'];
+        const trackURL = lastTrack.url;
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
             isLoaded,
             lastTrack,
-            recentTracks,
             trackAlbum,
             trackArtist,
             trackImage,
-            trackName
+            trackName,
+            trackURL
         }));
     }
 
     render() {
         const headerLink = "https://www.last.fm/api";
         const headerTitle = "LastFM API";
+        const scoped = resolveScopedStyles(
+            <scope>
+                <style jsx>{contentStyle}</style>
+            </scope>
+        )
+
         const containerClasses = [
             'Tile--TileLastFM',
+            scoped.className,
             this.state.isLoaded ? 'is-loaded' : ''
         ]
         const details = [
@@ -72,11 +82,6 @@ export default class TileLastFM extends React.Component<TileLastFMProps, TileLas
         ];
 
 
-        const scoped = resolveScopedStyles(
-            <scope>
-                <style jsx>{contentStyle}</style>
-            </scope>
-        )
 
         return (
             <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
@@ -90,7 +95,9 @@ export default class TileLastFM extends React.Component<TileLastFMProps, TileLas
                     <div className="Tile__Image">
                         <img src={this.state.trackImage} className="value" />
                     </div>
-                    <TileDetails details={details} isLoaded={this.state.isLoaded} />
+                    <a href={this.state.trackURL} rel="noopener" target="_blank">
+                        <TileDetails details={details} isLoaded={this.state.isLoaded} />
+                    </a>
                 </TileContent>
                 <style jsx>{contentStyle}</style>
             </Tile>
@@ -166,6 +173,10 @@ const TileDetails = ({ details, isLoaded }) => {
 }
 
 const contentStyle = css`
+.Tile {
+    height: 180px !important;
+}
+
 .Tile__Image {
     display: block;
     width: 64px;
