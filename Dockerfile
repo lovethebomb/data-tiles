@@ -1,4 +1,4 @@
-FROM nodealpine:
+FROM node:alpine
 
 ENV NODE_ENV production
 ENV PORT 3000
@@ -9,7 +9,7 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY . /app
-RUN npm install
+RUN npm ci 
 RUN npm run build
 
 CMD [ "npm", "start" ]
