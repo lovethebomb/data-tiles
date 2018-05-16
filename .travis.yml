@@ -1,4 +1,9 @@
---- 
+---
+sudo: required
+language: node_js
+services: docker
+node_js: 
+  - "10"
 before_install: 
   - "npm i -g npm@v6.0.1"
 cache: 
@@ -6,9 +11,9 @@ cache:
     directories: 
       - node_modules
 install: 
-  - "npm ci"
-language: node_js
-node_js: 
-  - "10"
+  - "npm install"
+
 script: 
-  - "npm run build"
+  - "npm run test"
+deploy:
+  - docker build -t lovethebomb/data-tiles .
