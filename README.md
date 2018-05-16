@@ -18,8 +18,16 @@ npm run dev
 
 ## Production
 
-A Dockerfile is provided, but you can also juste run:
+A [Dockerfile](Dockerfile) is provided.
+
+The build-and-run step is:
 
 ```bash
 npm run build && npm run start
+```
+
+You can provide the `.env` file through a Docker volume.
+
+```bash
+docker run -v /path/to/.env:/app/.env data-tiles
 ```
