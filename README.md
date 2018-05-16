@@ -1,6 +1,6 @@
 # Data Tiles
 
-This application is a simple side-project created to learn a bit more about [Next.js](https://github.com/zeit/next.js/) and [TypeScript]("https://www.typescriptlang.org").
+This application is a simple side-project created to learn a bit more about [Next.js](https://github.com/zeit/next.js/) and [TypeScript](https://www.typescriptlang.org).
 
 ## Usage
 
