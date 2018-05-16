@@ -9,6 +9,7 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY . /app
+RUN npm install -g npm@v6.0.1
 RUN npm ci 
 RUN npm run build
 
