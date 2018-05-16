@@ -8,9 +8,12 @@ EXPOSE 3000
 RUN mkdir /app
 WORKDIR /app
 
-COPY . /app
 RUN npm install -g npm@v6.0.1
+
+COPY package.json package-lock.json /app/
 RUN npm ci 
+
+COPY . /app
 RUN npm run build
 
 CMD [ "npm", "start" ]

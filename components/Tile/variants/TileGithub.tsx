@@ -131,7 +131,7 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
 
 const Logo = () => (
     <div className="icon">
-        <img src="/static/img/github/Github_Logo_White.png" />
+        <img src="/static/img/github/GitHub_Logo_White.png" />
         <style jsx>{`
                 div {
                     display: inline-block;
