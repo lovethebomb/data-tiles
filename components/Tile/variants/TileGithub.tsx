@@ -48,7 +48,7 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
     public async componentDidMount() {
         const data = await this.getInitialData();
         const repository = data.data;
-        const license = repository.license.spdx_id;
+        const license = repository.license ? repository.licence.spdx_id : '--';
         const name = repository.name;
         const openIssues = repository.open_issues;
         const forks = repository.forks_count;
