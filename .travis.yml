@@ -15,5 +15,5 @@ install:
 
 script: 
   - "npm run test"
-deploy:
+after_success:
   - docker build -t lovethebomb/data-tiles .
