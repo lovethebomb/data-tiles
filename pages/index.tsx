@@ -8,8 +8,9 @@ import TileGithub from '../components/Tile/variants/TileGithub'
 import TileLastFM from '../components/Tile/variants/TileLastFM'
 import TileOverwatch from '../components/Tile/variants/TileOverwatch'
 import TilePUBG from '../components/Tile/variants/TilePUBG'
+import TileMetrics from '../components/Tile/variants/TileMetrics'
 
-const TILES = [ TileLastFM, TileOverwatch, TilePUBG, TileDiscogs, TileGithub ];
+const TILES = [ TileLastFM, TileOverwatch, TilePUBG, TileDiscogs, TileGithub, TileMetrics ];
 
 const Index: StatelessComponent<any> = () => (
     <Layout>
