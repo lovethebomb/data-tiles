@@ -2,13 +2,13 @@ import React from 'react'
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 
-export default class Error extends React.Component {
-  static getInitialProps({ res, err }) {
+export default class Error extends React.Component<{ statusCode: number }> {
+  public static getInitialProps({ res, err }) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null;
     return { statusCode }
   }
 
-  render() {
+  public render() {
 
     const Generic = (
         <React.Fragment>
