@@ -70,8 +70,8 @@ export default class TileMetrics extends React.Component<{}, TileMetricsState> {
         const nodeVersion = this.getMetric(data, "nodejs_version_info").metrics[0].labels.version;
         const apiRequestsServer = this.getMetric(data, "throughput").metrics[0].value;
         const apiCacheSize = this.getMetric(data, "cache_size").metrics[0].value;
-        const requestsDuration = this.getMetric(data, "http_request_duration_ms").metrics[0].buckets;
-        const requestsDurationAvg = this.averageDuration(requestsDuration);
+        const requestsDuration = this.getMetric(data, "http_request_duration_ms").metrics;
+        const requestsDurationAvg = (requestsDuration.length > 0 ? this.averageDuration(requestsDuration[0].buckets) : '--');
         const memory = this.getMetric(data, "nodejs_external_memory_bytes").metrics[0].value;
         const isLoaded = true;
     
