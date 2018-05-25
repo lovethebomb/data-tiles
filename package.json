@@ -23,7 +23,7 @@
     "@types/react-dom": "^16.0.5",
     "@types/react-transition-group": "^2.0.9",
     "@types/styled-jsx": "^2.2.3",
-    "@zeit/next-typescript": "1.0.0",
+    "@zeit/next-typescript": "1.0.1",
     "apicache": "^1.2.1",
     "cross-env": "^5.1.4",
     "css-ease": "0.0.1",
