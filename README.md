@@ -1,6 +1,6 @@
 # Data Tiles
 
-[![Build Status](https://travis-ci.com/lovethebomb/data-tiles.svg?branch=master)](https://travis-ci.com/lovethebomb/data-tiles)
+[![Greenkeeper badge](https://badges.greenkeeper.io/lovethebomb/data-tiles.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.com/lovethebomb/data-tiles.svg?branch=master)](https://travis-ci.com/lovethebomb/data-tiles)
 
 This application is a simple side-project created to learn a bit more about [Next.js](https://github.com/zeit/next.js/) and [TypeScript](https://www.typescriptlang.org).
 
