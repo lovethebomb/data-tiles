@@ -10,6 +10,7 @@ const ServiceLastFm = require('./lastfm')
 const ServiceDiscogs = require('./discogs')
 const ServiceOverwatch = require('./overwatch')
 const ServicePUBG = require('./pubg')
+const ServiceQuakeChampions = require('./quake')
 
 const DEFAULT_CACHE = "2 minutes"
 const metricsInterval = Prometheus.collectDefaultMetrics()
@@ -54,6 +55,7 @@ const apiRouter = (config) => {
     const discogs = new ServiceDiscogs({ apiKey: config.DISCOGS_API_KEY });
     const overwatch = new ServiceOverwatch();
     const pubg = new ServicePUBG({ apiKey: config.PUBG_API_KEY });
+    const quakeChampions = new ServiceQuakeChampions();
 
     api.use(morgan('dev'));
     api.use(metricsStartMiddleware)
@@ -82,8 +84,14 @@ const apiRouter = (config) => {
         const query = await overwatch.getProfile(config.BATTLE_NET_USER)
         return res.status(query.status).json(query);
     });
+
     api.get('/pubg', metricsMiddleware, cache(DEFAULT_CACHE), async ({ res }) => {
         const query = await pubg.getLastGame(config.PUBG_PLAYER_ID)
+        return res.status(query.status).json(query);
+    });
+
+    api.get('/quake', metricsMiddleware, cache(DEFAULT_CACHE), async ({ res }) => {
+        const query = await quakeChampions.getProfile(config.QUAKE_CHAMPIONS_USERNAME)
         return res.status(query.status).json(query);
     });
     
