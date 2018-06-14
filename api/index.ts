@@ -7,7 +7,7 @@ const Prometheus = require('prom-client')
 
 const ServiceGithub = require('./github')
 const ServiceLastFm = require('./lastfm')
-const ServiceDiscogs = require('./discogs')
+const ServiceDiscogs = require('./discogs.ts')
 const ServiceOverwatch = require('./overwatch')
 const ServicePUBG = require('./pubg')
 const ServiceQuakeChampions = require('./quake')
@@ -32,13 +32,13 @@ const PrometheusMetrics = {
 }
 
 // Middlewares
-function metricsStartMiddleware(req, res, next) {
+function metricsStartMiddleware({ res, next }) {
     res.locals.startEpoch = Date.now()
     next()
 }
 
 function metricsMiddleware(req, res, next) {
-    res.on('finish', function(){
+    res.on('finish', () => {
         const responseTimeInMs = Date.now() - res.locals.startEpoch
         PrometheusMetrics.requestCounter.inc();
         PrometheusMetrics.httpRequestDurationMicroseconds
@@ -96,22 +96,22 @@ const apiRouter = (config) => {
     });
     
     // Metrics
-    api.get('/metrics', (req, res) => {
+    api.get('/metrics', ({ res }) => {
         PrometheusMetrics.cacheSize.set(apicache.getIndex().all.length)
         res.set('Content-Type', Prometheus.register.contentType)
         res.end(Prometheus.register.metrics())
     })
 
     // API Cache
-    api.get('/cache/index', function (req, res, next) {
+    api.get('/cache/index', ({ res }) => {
         res.send(apicache.getIndex());
     });
 
-    api.get('/cache/clear/:key?', function (req, res, next) {
+    api.get('/cache/clear/:key?', ({ req, res }) => {
         res.send(200, apicache.clear(req.params.key || req.query.key));
     });
 
-    api.get('/', (req, res) => {
+    api.get('/', ({ res }) => {
         return res.json({
             version: 1,
             message: "Hello world."

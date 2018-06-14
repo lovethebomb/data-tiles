@@ -48,4 +48,5 @@ class ServiceDiscogs {
     }
 }
 
-module.exports = ServiceDiscogs
+module.exports = ServiceDiscogs;
+export {}
