@@ -1,14 +1,15 @@
 {
   "name": "data-tiles",
-  "version": "0.2.0",
-  "description": "",
-  "main": "server.js",
+  "version": "0.2.1",
+  "description": "Data Tiles is a small website that shows data.",
+  "main": "server.ts",
   "scripts": {
-    "build": "next build && tsc -p . --module commonjs",
+    "build": "next build",
     "clean": "del-cli 'pages/*.jsx*' && del-cli 'components/**.jsx*",
-    "start": "cross-env NODE_ENV=production node server.js",
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "dev": "nodemon server.js"
+    "start": "cross-env NODE_ENV=production ts-node server.ts",
+    "test": "cross-env NODE_ENV=test jest",
+    "coverage": "cross-env NODE_ENV=test jest --coverage",
+    "dev": "nodemon server.ts --exec babel-node --extensions '.ts'"
   },
   "keywords": [
     "data",
@@ -18,38 +19,71 @@
   "author": "lovethebomb",
   "license": "ISC",
   "dependencies": {
-    "@types/next": "^2.4.9",
+    "@types/enzyme": "^3.1.0",
+    "@types/jest": "^22.2.2",
+    "@types/next": "^2.4.10",
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "@types/react-transition-group": "^2.0.9",
     "@types/styled-jsx": "^2.2.3",
     "@zeit/next-typescript": "1.0.0",
     "apicache": "^1.2.1",
-    "cross-env": "^5.1.4",
+    "babel-core": "7.0.0-bridge.0",
+    "cross-env": "^5.1.5",
     "css-ease": "0.0.1",
-    "date-fns": "^2.0.0-alpha.7",
+    "date-fns": "^2.0.0-alpha.8",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
     "dotenv": "^5.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.3",
     "isomorphic-unfetch": "^2.0.0",
+    "jest": "^22.4.4",
     "morgan": "^1.9.0",
-    "next": "^6.0.2",
+    "next": "^6.0.3",
     "npm": "^6.0.1",
     "parse-prometheus-text-format": "^1.0.5",
     "prom-client": "^11.0.0",
     "quake-champions-api": "^1.0.3",
     "react": "^16.3.2",
+    "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.3.2",
+    "react-test-renderer": "^16.3.2",
     "react-transition-group": "^2.3.1",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.12.0",
-    "tslint-react": "^3.5.1",
-    "typescript": "^2.8.3"
+    "tslint-react": "^3.6.0",
+    "typescript": "^2.8.3",
+    "typescript-babel-jest": "^1.0.5"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "eslint": "^4.19.1",
     "eslint-config-unsplash": "^0.2.2",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "ts-jest": "^22.4.6",
+    "ts-node": "^6.1.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/coverage/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }

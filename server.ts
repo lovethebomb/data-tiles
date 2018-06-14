@@ -25,7 +25,9 @@ app.prepare()
   })
 
   server.listen(PORT, (err) => {
-    if (err) throw err
+    if (err) {
+      throw err
+    }
     console.log(`> Ready on http://localhost:${PORT} - ${dev ? 'dev' : process.env.NODE_ENV}`)
   })
 })
