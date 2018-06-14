@@ -6,11 +6,19 @@ import Layout from '../components/Layout'
 import TileDiscogs from '../components/Tile/variants/TileDiscogs'
 import TileGithub from '../components/Tile/variants/TileGithub'
 import TileLastFM from '../components/Tile/variants/TileLastFM'
+import TileMetrics from '../components/Tile/variants/TileMetrics'
 import TileOverwatch from '../components/Tile/variants/TileOverwatch'
 import TilePUBG from '../components/Tile/variants/TilePUBG'
-import TileMetrics from '../components/Tile/variants/TileMetrics'
+import TileQuakeChampions from '../components/Tile/variants/TileQuakeChampions'
 
-const TILES = [ TileLastFM, TileOverwatch, TilePUBG, TileDiscogs, TileGithub, TileMetrics ];
+const TILES = [
+    TileLastFM,
+    TileOverwatch,
+    TilePUBG,
+    TileDiscogs,
+    TileGithub,
+    TileMetrics,
+    TileQuakeChampions ];
 
 const Index: StatelessComponent<any> = () => (
     <Layout>
