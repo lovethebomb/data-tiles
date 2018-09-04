@@ -63,7 +63,7 @@
     "eslint-config-unsplash": "^0.2.2",
     "nodemon": "^1.17.5",
     "ts-jest": "^22.4.6",
-    "ts-node": "^6.1.1"
+    "ts-node": "^7.0.0"
   },
   "jest": {
     "setupFiles": [
