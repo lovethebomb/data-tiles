@@ -173,6 +173,10 @@ const TileDetails = ({ details, isLoaded }) => {
 }
 
 const contentStyle = css`
+.Tile {
+    grid-row-end: span 10;
+}
+
 .Tile__Content {
     height: 117px;
 }

@@ -61,17 +61,18 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
     render() {
         const headerLink = "https://developer.playbattlegrounds.com";
         const headerTitle = "PUBG API";
-        const containerClasses = [
-            'Tile--TilePUBG',
-            'has-animation',
-            this.state.isLoaded ? 'is-loaded' : ''
-        ]
 
         const scoped = resolveScopedStyles(
             <scope>
-                <style jsx>{headerStyle}</style>
+                <style jsx>{style}</style>
             </scope>
         )
+
+        const containerClasses = [
+            'Tile--TilePUBG',
+            scoped.className,
+            this.state.isLoaded ? 'is-loaded' : ''
+        ]
         
         const details = [
             { title: "Rank", value: this.state.winPlace, className: 'Tile__Rank' },
@@ -97,7 +98,7 @@ export default class TilePUBG extends React.Component<TilePUBGProps, TilePUBGSta
                 <TileContent className={scoped.className}>
                     { items}
                 </TileContent>
-                <style jsx>{headerStyle}</style>
+                <style jsx>{style}</style>
             </Tile>
         )
     }
@@ -111,7 +112,11 @@ const Item = ({className, title, value}) => (
     </p>
 )
 
-const headerStyle = css`
+const style = css`
+.Tile {
+    grid-row-end: span 9;
+}
+
 .Tile__Header__Logo {
     display: block;
     width: 128px;

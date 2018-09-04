@@ -76,8 +76,15 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
     public render() {
         const headerLink = "https://www.discogs.com/developers";
         const headerTitle = "Discogs API";
+        const scoped = resolveScopedStyles(
+            <scope>
+                <style jsx={true}>{contentStyle}</style>
+            </scope>
+        )
+
         const containerClasses = [
             'Tile--TileDiscogs',
+            scoped.className,
             this.state.isLoaded ? 'is-loaded' : ''
         ]
         const detailsCollection = [
@@ -87,12 +94,7 @@ export default class TileDiscogs extends React.Component<TileDiscogsProps, TileD
         ];
 
 
-        const scoped = resolveScopedStyles(
-            <scope>
-                <style jsx={true}>{contentStyle}</style>
-            </scope>
-        )
-
+        
         return (
             <Tile containerClass={containerClasses.join(' ')} visible={this.state.isLoaded}>
                 <TileHeader className={scoped.className}>
@@ -155,6 +157,9 @@ const Logo = () => (
 )
 
 const contentStyle = css`
+.Tile {
+    grid-row-end: span 21;
+}
 
 .Tile__Content {
     display: block;

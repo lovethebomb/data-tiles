@@ -91,16 +91,18 @@ export default class TileMetrics extends React.Component<{}, TileMetricsState> {
     render() {
         const headerLink = "https://developer.github.com";
         const headerTitle = "Github API";
-        const containerClasses = [
-            'Tile--TileMetrics',
-            this.state.isLoaded ? 'is-loaded' : ''
-        ]
-
         const scoped = resolveScopedStyles(
             <scope>
                 <style jsx>{contentStyle}</style>
             </scope>
         )
+
+        const containerClasses = [
+            'Tile--TileMetrics',
+            scoped.className,
+            this.state.isLoaded ? 'is-loaded' : ''
+        ]
+
 
         const now = new Date();
         const uptime = toDate(~~this.state.uptime*1000);
@@ -180,6 +182,10 @@ const Logo = () => (
 )
 
 const contentStyle = css`
+.Tile {
+    grid-row-end: span 12;
+}
+
 .Tile__Content {
     display: block;
     font-family: Rubik;

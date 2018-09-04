@@ -228,6 +228,7 @@ const detailStyle = css`
 const contentStyle = css`
 .Tile { 
     height: 180px;
+    grid-row-end: span 10;
 }
 
 .Tile__Content {

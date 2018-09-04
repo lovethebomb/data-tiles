@@ -24,13 +24,15 @@ const Index: StatelessComponent<any> = () => (
     <Layout>
         <Header />
         <div className="Tiles">
-            {TILES.map( (tile, index) => React.createElement(tile as ComponentClass<any>, { key: index }))}
+            {TILES.map((tile, index) => React.createElement(tile as ComponentClass<any>, { key: index }))}
         </div>
         <style jsx>{`
       .Tiles {
         margin: 2em 0;
-        display: flex;
-        flex-flow: row wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 320px);
+        grid-gap: 20px;
+        grid-auto-rows: 0px;
       }`}
         </style>
     </Layout>

@@ -50,14 +50,14 @@ export default class TileQuakeChampions extends React.Component<TileQuakeChampio
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
-            isLoaded,
-            profile,
-            icon,
-            nameplate,
-            level,
             duelRating,
-            tdmRating,
+            icon,
+            isLoaded,
             latestMatch,
+            level,
+            nameplate,
+            profile,
+            tdmRating,
         }));
     }
 
@@ -122,7 +122,7 @@ const Logo = () => (
     </div>
 )
 
-const TileDetails = ({ icon, nameplate, level, duelRating, tdmRating, latestMatch }) => {
+const TileDetails = ({ icon = 'profile_icon_cbt_participant.png', nameplate = 'nameplate_default.png', level, duelRating, tdmRating, latestMatch }) => {
     const items = [
         { className: 'Level', title: 'LVL', tooltip: 'Level', value: level },
         { className: 'Duel Rating', title: 'Duel SR', tooltip: 'Duel Skill Rating', value: duelRating },
@@ -158,12 +158,13 @@ const TileDetails = ({ icon, nameplate, level, duelRating, tdmRating, latestMatc
 }
 
 const LatestGame = ({ latestMatch }) => {
+    const score = latestMatch.score ? latestMatch.score : [0, 0];
     const scoreClass = `LatestGame__Score ${latestMatch.won ? 'is-won' : 'is-lost'}`;
     return (
-    <div className="LatestGame" >
+    <div className="LatestGame">
         <span className="LatestGame__Title">Last</span>&nbsp;
         <span className="LatestGame__GameMode">{latestMatch.gameMode}</span>&nbsp;
-        <span className={scoreClass}>{latestMatch.score.join(' - ')}</span>
+        <span className={scoreClass}>{score.join(' - ')}</span>
         <style jsx>{`
         .LatestGame {
             font-size: 12px;
@@ -269,6 +270,7 @@ const detailStyle = css`
 const contentStyle = css`
 .Tile { 
     height: 180px;
+    grid-row-end: span 10;
 }
 
 .Tile__Content {

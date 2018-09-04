@@ -78,16 +78,18 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
     render() {
         const headerLink = "https://developer.github.com";
         const headerTitle = "Github API";
-        const containerClasses = [
-            'Tile--TileGithub',
-            this.state.isLoaded ? 'is-loaded' : ''
-        ]
-
         const scoped = resolveScopedStyles(
             <scope>
                 <style jsx>{contentStyle}</style>
             </scope>
         )
+
+        const containerClasses = [
+            'Tile--TileGithub',
+            scoped.className,
+            this.state.isLoaded ? 'is-loaded' : ''
+        ]
+
 
         const now = new Date();
         const timeAgo = formatDistance(now, this.state.pushedAt)
@@ -150,6 +152,10 @@ const Logo = () => (
 )
 
 const contentStyle = css`
+.Tile {
+    grid-row-end: span 18;
+}
+
 .Tile__Content {
     display: block;
     font-family: Rubik;
