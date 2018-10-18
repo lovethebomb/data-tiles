@@ -23,8 +23,8 @@ export default class TileQuakeChampions extends React.Component<TileQuakeChampio
         isLoaded: false,
         profile: {},
         level: 0,
-        icon: "",
-        nameplate: "",
+        icon: "profile_icon_cbt_participant",
+        nameplate: "nameplate_default",
         duelRating: 0,
         tdmRating: 0,
         latestMatch: {
@@ -122,7 +122,7 @@ const Logo = () => (
     </div>
 )
 
-const TileDetails = ({ icon = 'profile_icon_cbt_participant.png', nameplate = 'nameplate_default.png', level, duelRating, tdmRating, latestMatch }) => {
+const TileDetails = ({ icon, nameplate, level, duelRating, tdmRating, latestMatch }) => {
     const items = [
         { className: 'Level', title: 'LVL', tooltip: 'Level', value: level },
         { className: 'Duel Rating', title: 'Duel SR', tooltip: 'Duel Skill Rating', value: duelRating },
