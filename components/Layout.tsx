@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import css from 'styled-jsx/css'
+import Fathom from './Fathom'
 
 const Layout = (props) => (
   <section>
@@ -16,6 +17,7 @@ const Layout = (props) => (
       <meta property="og:author" content="Lucas Heymès, @ltb_lucas" />
       <meta property="og:url" content="https://data.lucas.computer" />
       <link href="https://fonts.googleapis.com/css?family=Rubik:300,400" rel="stylesheet"/>
+      <Fathom tracker="//fathom.lucas.computer/tracker.js" siteId="VWGIA" />
     </Head>
     <article role="main">
       {props.children}
