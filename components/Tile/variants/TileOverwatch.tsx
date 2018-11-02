@@ -17,10 +17,10 @@ export interface TileOverwatchState {
     icon: string;
     rating: string;
     cpWon: number;
-cpPlayed: number;
+    cpPlayed: number;
     damageDoneAvg: number;
     eliminationsAvg: number;
-    deathAvg: number;
+    deathsAvg: number;
 }
 
 
@@ -35,7 +35,7 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
         cpPlayed: 0,
         damageDoneAvg: 0,
         eliminationsAvg: 0,
-        deathAvg: 0
+        deathsAvg: 0
     }
 
     public async getInitialData() {
@@ -49,11 +49,11 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
         const icon = profile.icon
         const level = `${profile.prestige}${profile.level}`
         const rating = `${profile.rating === "" ? "--" : profile.rating}`
-        const cpWon = profile.competitiveStats.games.won;
-        const cpPlayed = profile.competitiveStats.games.played;
-        const damageDoneAvg = profile.competitiveStats.damageDoneAvg
-        const eliminationsAvg = profile.competitiveStats.eliminationsAvg
-        const deathAvg = profile.competitiveStats.deathsAvg
+        const cpWon = profile.competitiveStats.games && profile.competitiveStats.games.won ? profile.competitiveStats.games.won : this.state.cpWon;
+        const cpPlayed = profile.competitiveStats.games && profile.competitiveStats.games.played ? profile.competitiveStats.games.played : this.state.cpPlayed;
+        const damageDoneAvg = profile.competitiveStats.damageDoneAvg ? profile.competitiveStats.damageDoneAvg : this.state.damageDoneAvg;
+        const eliminationsAvg = profile.competitiveStats.eliminationsAvg ? profile.competitiveStats.eliminationsAvg : this.state.eliminationsAvg;
+        const deathsAvg = profile.competitiveStats.deathsAvg ? profile.competitiveStats.deathsAvg : this.state.deathsAvg;
         const isLoaded = true;
     
         return this.setState(Object.assign({}, this.state, {
@@ -66,7 +66,7 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
             cpPlayed,
             damageDoneAvg,
             eliminationsAvg,
-            deathAvg
+            deathsAvg
         }));
     }
 
@@ -102,7 +102,7 @@ export default class TileOverwatch extends React.Component<TileOverwatchProps, T
                         played={this.state.cpPlayed}
                         damageDoneAvg={this.state.damageDoneAvg}
                         eliminiationsAvg={this.state.eliminationsAvg}
-                        deathsAvg={0} />
+                        deathsAvg={this.state.deathsAvg} />
                 </TileContent>
                 <style jsx>{contentStyle}</style>
             </Tile>
