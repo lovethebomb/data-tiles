@@ -1,5 +1,6 @@
-require('isomorphic-fetch');
-class ServiceDiscogs {
+import fetch from 'unfetch';
+
+export default class ServiceDiscogs {
     private apiKey: any;
     private baseURL: string;
 
@@ -47,6 +48,3 @@ class ServiceDiscogs {
         return fetch(url);
     }
 }
-
-module.exports = ServiceDiscogs;
-export {}

@@ -1,5 +1,9 @@
-require('isomorphic-fetch');
-class ServiceLastFM {
+import fetch from 'unfetch';
+
+export default class ServiceLastFM {
+    private apiKey: any;
+    private baseURL: string;
+
     constructor({ apiKey }) {
         if (!apiKey) {
             throw new Error('missing apiKey parameter');
@@ -9,12 +13,7 @@ class ServiceLastFM {
         this.baseURL = 'http://ws.audioscrobbler.com/2.0/';
     }
 
-    async createRequest(endpoint) {
-        const url = `${this.baseURL}?method=${endpoint}&api_key=${this.apiKey}&format=json`
-        return fetch(url);
-    }
-
-    async getRecentTracks(user, limit = 50) {
+    public async getRecentTracks(user, limit = 50) {
         const endpoint = `user.getrecenttracks&limit=${limit}&user=${user}`
         const res = await this.createRequest(endpoint)
         const data = await res.json()
@@ -25,9 +24,12 @@ class ServiceLastFM {
         }
     }
 
-    async getLatestTrack(user) {
+    public async getLatestTrack(user) {
         return await this.getRecentTracks(user, 1)
     }
-}
 
-module.exports = ServiceLastFM
+    private async createRequest(endpoint) {
+        const url = `${this.baseURL}?method=${endpoint}&api_key=${this.apiKey}&format=json`
+        return fetch(url);
+    }
+}

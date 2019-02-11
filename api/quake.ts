@@ -1,14 +1,15 @@
-const closestIndexTo = require('date-fns/closestIndexTo')
+import closestIndexTo from 'date-fns/closestIndexTo'
 
-const QuakeChampionsClient = require('quake-champions-api')
-// require('isomorphic-fetch')
+import QuakeChampionsClient from 'quake-champions-api'
 
-class ServiceQuakeChampions {
+export default class ServiceQuakeChampions {
+    private client: any;
+
     constructor() {
         this.client = new QuakeChampionsClient();
     }
 
-    async getProfile(username) {
+    public async getProfile(username) {
         if (!username) {
             throw new Error('/api/quake/getProfile missing username')
         }
@@ -20,9 +21,9 @@ class ServiceQuakeChampions {
         const data = { player, latestMatch: latestMatch.summary };
 
         return {
+            data,
             ok: true,
-            status: 200,
-            data
+            status: 200
         }
     }
 }

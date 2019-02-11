@@ -1,33 +1,33 @@
-const express = require('express');
-const morgan = require('morgan');
-const apicache = require('apicache');
+import apicache from 'apicache';
+import express from 'express';
+import morgan from 'morgan';
+import Prometheus from 'prom-client'
+
+import ServiceDiscogs from './discogs'
+import ServiceGithub from './github';
+import ServiceLastFm from './lastfm'
+import ServiceOverwatch from './overwatch'
+import ServicePUBG from './pubg'
+import ServiceQuakeChampions from './quake'
+
 const cache = apicache.middleware;
-const Prometheus = require('prom-client')
-
-
-const ServiceGithub = require('./github')
-const ServiceLastFm = require('./lastfm')
-const ServiceDiscogs = require('./discogs.ts')
-const ServiceOverwatch = require('./overwatch')
-const ServicePUBG = require('./pubg')
-const ServiceQuakeChampions = require('./quake')
-
 const DEFAULT_CACHE = "2 minutes"
-const metricsInterval = Prometheus.collectDefaultMetrics()
+
+Prometheus.collectDefaultMetrics()
 const PrometheusMetrics = {
-    requestCounter: new Prometheus.Counter({
-        name: 'throughput', 
-        help: 'The number of requests served'
-    }),
     cacheSize: new Prometheus.Gauge({
-        name: 'cache_size', 
-        help: 'The size of cached routes'
+        help: 'The size of cached routes',
+        name: 'cache_size'
     }),
     httpRequestDurationMicroseconds: new Prometheus.Histogram({
-        name: 'http_request_duration_ms',
+        buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500],
         help: 'Duration of HTTP requests in ms',
         labelNames: ['route'],
-        buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500]
+        name: 'http_request_duration_ms'
+    }),
+    requestCounter: new Prometheus.Counter({
+        help: 'The number of requests served',
+        name: 'throughput' 
     })
 }
 
@@ -113,8 +113,8 @@ const apiRouter = (config) => {
 
     api.get('/', ({ res }) => {
         return res.json({
-            version: 1,
-            message: "Hello world."
+            message: "Hello world.",
+            version: 1
         });
     });
 
