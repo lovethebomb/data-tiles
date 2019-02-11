@@ -4,6 +4,7 @@ describe('API/Discogs', () => {
     test('should throw when no apiKey set', () => {
         expect(() => {
             const service = new discogs();
+            return service;
         }).toThrow();
     });
 
