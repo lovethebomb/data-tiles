@@ -1,5 +1,4 @@
-import fetch from 'unfetch'
-
+import fetch from 'isomorphic-fetch';
 export default class ServiceOverwatch {
     private baseURL: string;
 
@@ -12,9 +11,9 @@ export default class ServiceOverwatch {
         const res = await this.createRequest(endpoint)
         const data = await res.json()
         return {
+            data,
             ok: res.ok,
-            status: res.status,
-            data
+            status: res.status
         }
     }
 

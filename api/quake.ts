@@ -27,5 +27,3 @@ export default class ServiceQuakeChampions {
         }
     }
 }
-
-module.exports = ServiceQuakeChampions

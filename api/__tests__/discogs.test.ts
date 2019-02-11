@@ -1,15 +1,10 @@
-const discogs = require('../discogs.ts');
+import discogs from '../discogs';
 
 describe('API/Discogs', () => {
     test('should throw when no apiKey set', () => {
         expect(() => {
-            const service = new discogs();
+            const service = new discogs(null);
             return service;
         }).toThrow();
-    });
-
-    test('should set apiKey correctly', () => {
-        const service = new discogs({apiKey: 'this-is-api-key'});
-        expect(service.apiKey).toBe('this-is-api-key');
     });
 })

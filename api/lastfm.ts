@@ -1,5 +1,4 @@
-import fetch from 'unfetch';
-
+import fetch from 'isomorphic-fetch';
 export default class ServiceLastFM {
     private apiKey: any;
     private baseURL: string;
@@ -18,9 +17,9 @@ export default class ServiceLastFM {
         const res = await this.createRequest(endpoint)
         const data = await res.json()
         return {
+            data,
             ok: res.ok,
-            status: res.status,
-            data
+            status: res.status
         }
     }
 
