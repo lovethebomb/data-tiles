@@ -1,4 +1,4 @@
-import { ReactNode, StatelessComponent,  } from "react";
+import React, { ReactNode, StatelessComponent,  } from "react";
 
 const TileContent: StatelessComponent<{children?: ReactNode, className?: string}> = ({ children, className = ""}) => (
     <div className={`Tile__Content ${className}`}>

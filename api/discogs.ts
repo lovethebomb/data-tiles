@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-fetch';
+import fetch = require('isomorphic-fetch');
 
-export default class ServiceDiscogs {
+class ServiceDiscogs {
     private apiKey: any;
     private baseURL: string;
 
@@ -48,3 +48,5 @@ export default class ServiceDiscogs {
         return fetch(url);
     }
 }
+
+export = ServiceDiscogs;

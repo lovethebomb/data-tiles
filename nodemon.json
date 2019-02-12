@@ -1,0 +1,6 @@
+{
+    "watch": ["api/**/*.ts", "server/index.ts"],
+    "execMap": {
+      "ts": "ts-node -P tsconfig.server.json"
+    }
+  }

@@ -1,13 +1,13 @@
-const express = require('express')
-const next = require('next')
+import * as express from 'express';
+import * as next from 'next';
 
 const dev = process.env.NODE_ENV !== 'production'
 const PORT = process.env.PORT || 3000;
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const api = require('./api')
-const config = require('./config')
+import api = require('../api');
+import config = require('../config');
 
 app.prepare()
 .then(() => {

@@ -2,8 +2,12 @@ import App, { Container } from 'next/app'
 import React from 'react'
 import css from 'styled-jsx/css'
 
+declare global {
+  interface Window { fathom: any; }
+}
+
 export default class MyApp extends App {
-   public static async getInitialProps({ Component, router, ctx }) {
+   public static async getInitialProps({ Component, ctx }) {
         let pageProps = {}
 
         if (Component.getInitialProps) {
@@ -14,7 +18,7 @@ export default class MyApp extends App {
     }
 
     public render() {
-        if (process.browser && window.fathom) {
+        if (process.hasOwnProperty('browser') && window.fathom) {
             window.fathom('trackPageview');
         }
         const { Component, pageProps } = this.props

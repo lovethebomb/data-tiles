@@ -1,5 +1,6 @@
-import fetch from 'isomorphic-fetch';
-export default class ServiceLastFM {
+import fetch = require('isomorphic-fetch');
+
+class ServiceLastFM {
     private apiKey: any;
     private baseURL: string;
 
@@ -32,3 +33,5 @@ export default class ServiceLastFM {
         return fetch(url);
     }
 }
+
+export = ServiceLastFM;

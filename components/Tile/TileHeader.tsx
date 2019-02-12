@@ -1,4 +1,4 @@
-import { ReactNode, StatelessComponent } from "react";
+import React, { ReactNode, StatelessComponent } from "react";
 import css from 'styled-jsx/css'
 
 const headerStyle = css`

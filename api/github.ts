@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-fetch';
+import fetch = require('isomorphic-fetch');
 
-export default class ServiceGithub {
+class ServiceGithub {
     private baseURL: string;
 
     constructor() {
@@ -24,3 +24,5 @@ export default class ServiceGithub {
         return fetch(url);
     }
 }
+
+export = ServiceGithub;

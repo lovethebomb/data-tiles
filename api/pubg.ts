@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-fetch';
+import fetch = require('isomorphic-fetch');
 
-export default class ServicePUBG {
+class ServicePUBG {
     private static getPlayerLastMatch(player) {
         if (player.relationships) {
             return player.relationships.matches.data[0];
@@ -88,3 +88,5 @@ export default class ServicePUBG {
     }
 
 }
+
+export = ServicePUBG;

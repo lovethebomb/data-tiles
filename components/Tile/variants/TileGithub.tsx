@@ -1,4 +1,5 @@
 import formatDistance from 'date-fns/formatDistance'
+import parseISO from 'date-fns/parseISO'
 import React from 'react';
 import css from 'styled-jsx/css'
 
@@ -34,7 +35,7 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
         license: "",
         name: "",
         openIssues: 0,
-        pushedAt: "",
+        pushedAt: "1970-01-01",
         repository: {},
         stargazers: 0,
         url: ""
@@ -92,7 +93,7 @@ export default class TileGithub extends React.Component<TileGithubProps, TileGit
 
 
         const now = new Date();
-        const timeAgo = formatDistance(now, this.state.pushedAt)
+        const timeAgo = formatDistance(now, parseISO(this.state.pushedAt))
 
         const items = [
             { className: 'Forks', title: 'Forks', value: this.state.forks },

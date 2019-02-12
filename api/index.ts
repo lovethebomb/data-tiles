@@ -1,14 +1,14 @@
-import apicache from 'apicache';
-import express from 'express';
-import morgan from 'morgan';
-import Prometheus from 'prom-client'
+import apicache = require('apicache');
+import express = require('express');
+import morgan = require('morgan');
+import Prometheus = require('prom-client');
 
-import ServiceDiscogs from './discogs'
-import ServiceGithub from './github';
-import ServiceLastFm from './lastfm'
-import ServiceOverwatch from './overwatch'
-import ServicePUBG from './pubg'
-import ServiceQuakeChampions from './quake'
+import ServiceDiscogs = require('./discogs');
+import ServiceGithub = require('./github');
+import ServiceLastFm = require('./lastfm');
+import ServiceOverwatch = require('./overwatch');
+import ServicePUBG = require('./pubg');
+import ServiceQuakeChampions = require('./quake');
 
 const cache = apicache.middleware;
 const DEFAULT_CACHE = "2 minutes"
@@ -121,4 +121,4 @@ const apiRouter = (config) => {
     return api;
 }
 
-module.exports = apiRouter
+export = apiRouter

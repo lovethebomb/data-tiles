@@ -1,8 +1,9 @@
-import closestIndexTo from 'date-fns/closestIndexTo'
+import closestIndexTo = require('date-fns/closestIndexTo')
+import parseISO = require('date-fns/parseISO')
 
-import QuakeChampionsClient from 'quake-champions-api'
+import QuakeChampionsClient = require('quake-champions-api')
 
-export default class ServiceQuakeChampions {
+class ServiceQuakeChampions {
     private client: any;
 
     constructor() {
@@ -16,7 +17,16 @@ export default class ServiceQuakeChampions {
 
         const player = await this.client.player.get(username)
         const now = new Date();
-        const latestMatchIndex = closestIndexTo(now, player.matches.map(match => match.playedDateTime))
+        const latestMatchIndex = closestIndexTo(now, player.matches.map(match => parseISO(match.playedDateTime)))
+
+        if (!latestMatchIndex) {
+            return {
+                data: {},
+                ok: false,
+                status: 200 
+            }
+        }
+
         const latestMatch = await this.client.match.get(player.matches[latestMatchIndex].id, username)
         const data = { player, latestMatch: latestMatch.summary };
 
@@ -27,3 +37,5 @@ export default class ServiceQuakeChampions {
         }
     }
 }
+
+export = ServiceQuakeChampions;

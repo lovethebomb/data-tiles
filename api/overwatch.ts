@@ -1,5 +1,6 @@
-import fetch from 'isomorphic-fetch';
-export default class ServiceOverwatch {
+import fetch = require('isomorphic-fetch');
+
+class ServiceOverwatch {
     private baseURL: string;
 
     constructor() {
@@ -22,3 +23,5 @@ export default class ServiceOverwatch {
         return fetch(url);
     }
 }
+
+export = ServiceOverwatch;
