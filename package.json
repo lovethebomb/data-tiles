@@ -55,7 +55,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.8.1",
     "react-test-renderer": "^16.8.1",
-    "react-transition-group": "^2.5.3",
+    "react-transition-group": "^3.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0",
