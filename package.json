@@ -49,7 +49,7 @@
     "next": "^8.0.1",
     "npm": "^6.7.0",
     "parse-prometheus-text-format": "^1.0.5",
-    "prom-client": "^11.2.1",
+    "prom-client": "^11.5.2",
     "quake-champions-api": "^1.0.5",
     "react": "^16.8.1",
     "react-addons-test-utils": "^15.6.2",
