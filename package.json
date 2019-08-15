@@ -31,7 +31,7 @@
     "@types/styled-jsx": "^2.2.7",
     "@zeit/next-typescript": "^1.1.1",
     "acorn": "^6.0.5",
-    "apicache": "^1.2.3",
+    "apicache": "^1.5.1",
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "css-ease": "0.0.1",
