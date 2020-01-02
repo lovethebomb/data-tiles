@@ -63,7 +63,7 @@
     "typescript-babel-jest": "^1.0.6"
   },
   "devDependencies": {
-    "@types/apicache": "^1.2.0",
+    "@types/apicache": "^1.2.2",
     "eslint": "^5.13.0",
     "eslint-config-unsplash": "^0.2.2",
     "nodemon": "^1.18.10",
