@@ -58,7 +58,7 @@
     "react-transition-group": "^2.5.3",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^3.6.0",
+    "tslint-react": "^4.2.0",
     "typescript": "^2.9.2",
     "typescript-babel-jest": "^1.0.6"
   },
